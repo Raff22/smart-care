@@ -3,10 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:smart_care/helpers/navigator.dart';
 import 'package:smart_care/views/onboarding_screens/onboarding_2.dart';
+import 'package:smart_care/views/onboarding_screens/onboarding_4.dart';
 import 'package:smart_care/widgets/onboarding_progress.dart';
 
-class OnBoardingOneView extends StatelessWidget {
-  const OnBoardingOneView({super.key});
+class OnBoardingThreeView extends StatelessWidget {
+  const OnBoardingThreeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,9 @@ class OnBoardingOneView extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(left: 50.0),
+              padding: const EdgeInsets.only(left: 110.0),
               child: Image.asset(
-                'assets/images/night-game-dynamic-soccer-player-action-field@2x.png',
+                'assets/images/basketball-player-applying-bandage-knee.png',
               ),
             ),
             Padding(
@@ -43,8 +44,8 @@ class OnBoardingOneView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 212.0,
-              height: 37.0,
+              width: 214.0,
+              height: 38.0,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.0),
@@ -57,7 +58,7 @@ class OnBoardingOneView extends StatelessWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    'اكتشف قوتك',
+                    ' قل وداعًا للإصابات',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
@@ -69,9 +70,8 @@ class OnBoardingOneView extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             Center(
-              // Added Center to keep text in the middle
               child: const Text(
-                'حلّل حالتك الصحية بدقة وراقب\nمؤشراتك الحيوية لتحسين لياقتك\nوجودة حياتك.',
+                'حلّل أسباب الإصابات وتابع حالتك\nلتعود أقوى. احصل على خطة\nوقائية مخصصة لك.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -88,14 +88,21 @@ class OnBoardingOneView extends StatelessWidget {
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Distribute space evenly
                 children: [
-                  Transform.rotate(
-                    angle: math.pi, // 180 degrees in radians
-                    child: SizedBox(),
+                  GestureDetector(
+                    onTap: () {
+                      Future.microtask(() {
+                        context.popView();
+                      });
+                    },
+                    child: Transform.rotate(
+                      angle: math.pi, // 180 degrees in radians
+                      child: Image.asset('assets/icons/arrow.png'),
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
                       Future.microtask(() {
-                        context.pushView(view: OnBoardingTwoView());
+                        context.pushView(view: OnBoardingFourView());
                       });
                     },
                     child: Image.asset('assets/icons/arrow.png'),
@@ -104,7 +111,7 @@ class OnBoardingOneView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            PageIndicatorRow(currentPage: 0, indicatorCount: 4),
+            PageIndicatorRow(currentPage: 2, indicatorCount: 4),
           ],
         ),
       ),

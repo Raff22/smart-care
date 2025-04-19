@@ -2,11 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:smart_care/helpers/navigator.dart';
-import 'package:smart_care/views/onboarding_screens/onboarding_2.dart';
+import 'package:smart_care/views/onboarding_screens/onboarding_3.dart';
 import 'package:smart_care/widgets/onboarding_progress.dart';
 
-class OnBoardingOneView extends StatelessWidget {
-  const OnBoardingOneView({super.key});
+class OnBoardingTwoView extends StatelessWidget {
+  const OnBoardingTwoView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,13 @@ class OnBoardingOneView extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(left: 50.0),
+              padding: const EdgeInsets.only(right: 100.0),
               child: Image.asset(
-                'assets/images/night-game-dynamic-soccer-player-action-field@2x.png',
+                'assets/images/composite-image-athletic-woman-practicing-show-jumping.png',
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 160.0),
+              padding: const EdgeInsets.only(right: 160.0),
               child: Container(
                 color: const Color.fromRGBO(196, 12, 196, 0.8),
                 height: 30,
@@ -50,14 +50,14 @@ class OnBoardingOneView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(24.0),
                   gradient: const LinearGradient(
                     colors: [
-                      Color.fromRGBO(56, 29, 255, 1.0),
                       Color.fromRGBO(196, 12, 196, 0.8),
+                      Color.fromRGBO(56, 29, 255, 1.0),
                     ],
                   ),
                 ),
                 child: const Center(
                   child: Text(
-                    'اكتشف قوتك',
+                    'طــوّر أدائك',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
@@ -69,9 +69,8 @@ class OnBoardingOneView extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             Center(
-              // Added Center to keep text in the middle
               child: const Text(
-                'حلّل حالتك الصحية بدقة وراقب\nمؤشراتك الحيوية لتحسين لياقتك\nوجودة حياتك.',
+                'تابع أداءك في التمارين والمباريات،\nوتعرّف على نقاط القوة والضعف\nلتحقق أفضل النتائج.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -88,14 +87,21 @@ class OnBoardingOneView extends StatelessWidget {
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Distribute space evenly
                 children: [
-                  Transform.rotate(
-                    angle: math.pi, // 180 degrees in radians
-                    child: SizedBox(),
+                  GestureDetector(
+                    onTap: () {
+                      Future.microtask(() {
+                        context.popView();
+                      });
+                    },
+                    child: Transform.rotate(
+                      angle: math.pi, // 180 degrees in radians
+                      child: Image.asset('assets/icons/arrow.png'),
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
                       Future.microtask(() {
-                        context.pushView(view: OnBoardingTwoView());
+                        context.pushView(view: OnBoardingThreeView());
                       });
                     },
                     child: Image.asset('assets/icons/arrow.png'),
@@ -104,7 +110,7 @@ class OnBoardingOneView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            PageIndicatorRow(currentPage: 0, indicatorCount: 4),
+            PageIndicatorRow(currentPage: 1, indicatorCount: 4),
           ],
         ),
       ),

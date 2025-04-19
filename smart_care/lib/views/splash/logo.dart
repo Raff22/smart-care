@@ -18,10 +18,7 @@ class LogoView extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFF8BBD0), // Light Pink
-              Colors.white, // Deeper Pink
-            ],
+            colors: [Color.fromARGB(255, 224, 197, 247), Colors.white],
           ),
         ),
         child: Column(
