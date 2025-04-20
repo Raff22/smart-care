@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_smartapp/biganaly.dart';
 
 
 class DONE extends StatelessWidget {
@@ -105,7 +106,15 @@ class DONE extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>Biganaly(
+                                        
+                                        )),
+                              );
+                          },
                           child: const Text(
                             "تم تسجيل اشتراك" ,
                             style: TextStyle(
@@ -128,3 +137,4 @@ class DONE extends StatelessWidget {
   }
 
   }
+
