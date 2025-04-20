@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:my_smartapp/done.dart';
 import 'package:my_smartapp/surenew.dart';
 
 class Newlogic extends StatefulWidget {
   const Newlogic({Key? key}) : super(key: key);
 
   @override
-  State<Newlogic> createState() => _MyAppState();
+  State<Newlogic> createState() => _NewlogicState();
 }
 
-bool isChecked = false;
+class _NewlogicState extends State<Newlogic> {
+  final _formKey = GlobalKey<FormState>();
+  bool isChecked = false;
 
-class _MyAppState extends State<Newlogic> {
-  bool rememberMe = false;
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
 
   InputDecoration customDecoration(String label, {Widget? suffix}) {
     return InputDecoration(
@@ -28,6 +32,14 @@ class _MyAppState extends State<Newlogic> {
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Color(0xFFC40CC4), width: 2),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
       ),
     );
@@ -47,7 +59,7 @@ class _MyAppState extends State<Newlogic> {
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context); // يرجع للصفحة السابقة
+                  Navigator.pop(context);
                 },
                 child: Image.asset(
                   'assets/icon_close (1).png',
@@ -56,7 +68,6 @@ class _MyAppState extends State<Newlogic> {
                 ),
               ),
             ),
-            // خلفية فوق يسار
             Positioned.fill(
               top: -500,
               right: -100,
@@ -65,7 +76,6 @@ class _MyAppState extends State<Newlogic> {
                 child: Image.asset("assets/image.png"),
               ),
             ),
-            // خلفية تحت يسار
             Positioned(
               bottom: 6,
               left: 0,
@@ -79,7 +89,6 @@ class _MyAppState extends State<Newlogic> {
                 ),
               ),
             ),
-            // اللوقو فوق
             Positioned(
               top: 150,
               left: 0,
@@ -91,7 +100,6 @@ class _MyAppState extends State<Newlogic> {
                 ),
               ),
             ),
-            // البوكس الأبيض
             Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.only(top: 180),
@@ -111,121 +119,155 @@ class _MyAppState extends State<Newlogic> {
                       ),
                     ],
                   ),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10),
-
-                      // اسم المستخدم
-                      TextField(
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.right,
-                        decoration: customDecoration('اسم المستخدم:'),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // كلمة المرور + تذكرني
-                      TextField(
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.right,
-                        obscureText: true,
-                        decoration: customDecoration(
-                          'كلمة المرور:',
-                          suffix: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'تذكرني',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: "Cairo",
-                                  color: Color(0xFFC40CC4),
-                                ),
-                              ),
-                              Checkbox(
-                                value: isChecked,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
-                                activeColor: Color(0xFFC40CC4),
-                                visualDensity: VisualDensity.compact,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // تأكيد كلمة المرور
-                      TextField(
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.right,
-                        obscureText: true,
-                        decoration: customDecoration('تأكيد كلمة المرور:'),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // البريد الإلكتروني
-                      TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.right,
-                        decoration: customDecoration('البريد الإلكتروني:'),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // رقم الهاتف
-                      TextField(
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.right,
-                        decoration: customDecoration('رقم الهاتف:'),
-                      ),
-                      const SizedBox(height: 20),
-
-                      // زر تسجيل الاشتراك
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFC40CC4),
-                              Color(0xFF381DFF),
-                              Color(0xFF1DFFE8),
-                            ],
-                            stops: [0.0, 0.69, 0.97],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Surenew()),
-                            );
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          controller: usernameController,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          decoration: customDecoration('اسم المستخدم:'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال اسم المستخدم';
+                            }
+                            return null;
                           },
-                          child: const Text(
-                            "تسجيل اشتراك جديد",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Cairo",
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: passwordController,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          obscureText: true,
+                          decoration: customDecoration(
+                            'كلمة المرور:',
+                            suffix: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'تذكرني',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: "Cairo",
+                                    color: Color(0xFFC40CC4),
+                                  ),
+                                ),
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isChecked = value!;
+                                    });
+                                  },
+                                  activeColor: Color(0xFFC40CC4),
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                              ],
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال كلمة المرور';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: confirmController,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          obscureText: true,
+                          decoration: customDecoration('تأكيد كلمة المرور:'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء تأكيد كلمة المرور';
+                            }
+                            if (value != passwordController.text) {
+                              return 'كلمتا المرور غير متطابقتين';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          decoration: customDecoration('البريد الإلكتروني:'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال البريد الإلكتروني';
+                            }
+                            if (!value.contains('@')) {
+                              return 'صيغة البريد غير صحيحة';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: phoneController,
+                          keyboardType: TextInputType.phone,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          decoration: customDecoration('رقم الهاتف:'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال رقم الهاتف';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFC40CC4),
+                                Color(0xFF381DFF),
+                                Color(0xFF1DFFE8),
+                              ],
+                              stops: [0.0, 0.69, 0.97],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const Surenew()),
+                                );
+                              }
+                            },
+                            child: const Text(
+                              "تسجيل اشتراك جديد",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Cairo",
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
