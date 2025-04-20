@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:smart_care/helpers/navigator.dart';
 import 'package:smart_care/views/features/dashboard.dart';
-import 'package:smart_care/views/splash/logo.dart';
 import 'package:smart_care/widgets/onboarding_progress.dart';
 
 class OnBoardingFourView extends StatelessWidget {

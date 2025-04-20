@@ -2,14 +2,32 @@ import 'package:flutter/material.dart';
 
 extension NavigatorExtension on BuildContext {
   // ---------------------------------------------------------------------------
-  pushView({required Widget view, Function(dynamic)? then}) {
-    Navigator.push(this, MaterialPageRoute(builder: (context) => view)).then((
-      value,
-    ) {
-      if (then != null) {
-        then(value);
-      }
-    });
+  Future<dynamic> pushView({
+    required Widget view,
+    Duration transitionDuration = const Duration(milliseconds: 300),
+    Curve transitionCurve = Curves.easeInOut,
+    Function(dynamic)? then,
+  }) async {
+    final result = await Navigator.push(
+      this,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => view,
+        transitionDuration: transitionDuration,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var fadeAnimation = CurvedAnimation(
+            parent: animation,
+            curve: transitionCurve,
+          );
+
+          return FadeTransition(opacity: fadeAnimation, child: child);
+        },
+      ),
+    );
+
+    if (then != null) {
+      then(result);
+    }
+    return result;
   }
 
   //----------------------------------------------------------------------------
