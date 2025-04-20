@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_smartapp/biganaly.dart';
+import 'package:my_smartapp/Login.dart';
 
 
-class DONE extends StatelessWidget {
-  const DONE({Key? key}) : super(key: key);
+class DELEDT extends StatelessWidget {
+  const DELEDT({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +107,14 @@ class DONE extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>Biganaly(
-                                        
-                                        )),
+                                    builder: (context) => const Login()),
                               );
                           },
                           child: const Text(
-                            "تم تسجيل اشتراك" ,
+                          'تم حذف الحساب' ,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
