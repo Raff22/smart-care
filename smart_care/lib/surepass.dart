@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-
+import 'package:my_smartapp/biganaly.dart';
 
 class Surepass extends StatelessWidget {
   const Surepass({Key? key}) : super(key: key);
@@ -17,22 +16,22 @@ class Surepass extends StatelessWidget {
         body: Stack(
           children: [
             Positioned(
-  top: 50,
-  left: 20,
-  child: GestureDetector(
-    onTap: () {
-      Navigator.pop(context); // يرجع للصفحة السابقة
-    },
-    child: Image.asset(
-  'assets/icon_close (1).png',
-      width: 24,
-      height: 24,
-    ),
-  ),
-),
+              top: 50,
+              left: 20,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // يرجع للصفحة السابقة
+                },
+                child: Image.asset(
+                  'assets/icon_close (1).png',
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+            ),
             Positioned.fill(
               top: -500,
-          left: -100,
+              left: -100,
               child: Opacity(
                 opacity: 0.1,
                 child: Image.asset(
@@ -43,7 +42,7 @@ class Surepass extends StatelessWidget {
 
             Positioned(
               bottom: 6,
-            right: 0,
+              right: 0,
               child: Opacity(
                 opacity: 0.3,
                 child: Image.asset(
@@ -92,11 +91,13 @@ class Surepass extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 10), // بدل اللوقو
-                     Image.asset("assets/Isolation_Mode.png"    ,  height: 100,),//صوره الحمايه
-                    
+                      Image.asset(
+                        "assets/Isolation_Mode.png",
+                        height: 100,
+                      ), //صوره الحمايه
+
                       const SizedBox(height: 3),
-                      
-                  
+
                       Container(
                         width: double.infinity,
                         height: 50,
@@ -121,9 +122,17 @@ class Surepass extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>Biganaly(
+                                        
+                                        )),
+                              );
+                          },
                           child: const Text(
-                            "تم نغيير كلمة المرور" ,
+                            "تم نغيير كلمة المرور",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -131,7 +140,6 @@ class Surepass extends StatelessWidget {
                           ),
                         ),
                       ),
-                    
                     ],
                   ),
                 ),
@@ -142,6 +150,5 @@ class Surepass extends StatelessWidget {
       ),
     );
   }
-
-  }
+}
 
