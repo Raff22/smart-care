@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:smart_care/widgets/onboarding_progress.dart';
@@ -74,33 +76,78 @@ class _DashboardViewState extends State<DashboardView> {
                     spacing: 8,
                   ),
                   const SizedBox(height: 30),
-                  Container(
-                    width: 400,
-                    height: 157,
-                    decoration: BoxDecoration(
-                      border: const GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromRGBO(55, 29, 255, 0.627),
-                            Color.fromRGBO(196, 12, 196, 0.627),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: const GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromRGBO(55, 29, 255, 0.627),
+                              Color.fromRGBO(196, 12, 196, 0.627),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          width: 2, // Border width
                         ),
-                        width: 2, // Border width
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ), // Optional: rounded corners
                       ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ), // Optional: rounded corners
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset('assets/images/player3.png'),
-                          Image.asset('assets/images/player1.png'),
-                          Image.asset('assets/images/player2.png'),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween, // Distribute space evenly
+                                  children: [
+                                    Transform.rotate(
+                                      angle:
+                                          math.pi +
+                                          90, // 180 degrees in radians
+                                      child: Image.asset(
+                                        'assets/icons/icon_close.png',
+                                      ),
+                                    ),
+                                    Text(
+                                      "اللاعبين",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(
+                                          196,
+                                          12,
+                                          196,
+                                          0.627,
+                                        ),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                      ), // Optional: Style the text
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Image.asset('assets/images/player3.png'),
+                                  Image.asset('assets/images/player1.png'),
+                                  Image.asset('assets/images/player2.png'),
+                                ],
+                              ),
+                              Divider(
+                                color: Color.fromRGBO(55, 29, 255, 0.627),
+                              ),
+                              Image.asset('assets/icons/group_arrow.png'),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -135,7 +182,7 @@ class _DashboardViewState extends State<DashboardView> {
                   ),
                   const SizedBox(height: 40),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _buildSquareButton('الإعدادات', () {
                         // Add your action for button 1
