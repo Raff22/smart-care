@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_smartapp/analys.dart';
+import 'package:my_smartapp/biganaly.dart';
+
 import 'package:my_smartapp/newlogic.dart';
 import 'package:my_smartapp/nopass.dart';
+import 'package:my_smartapp/page.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -203,6 +207,13 @@ class _LoginState extends State<Login> {
                               print("اسم المستخدم: $user");
                               print("كلمة المرور: $pass");
                               // هنا تقدر تنقل لصفحة المستخدم أو تحقق الدخول
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>Biganaly(
+                                        
+                                        )),
+                              );
                             }
                           },
                           child: const Text(
@@ -245,8 +256,7 @@ class _LoginState extends State<Login> {
                           buildSocialIcon('assets/google (1).png', () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content:
-                                      Text('تم تسجيل الدخولGoogle')),
+                                  content: Text('تم تسجيل الدخولGoogle')),
                             );
                           }),
                           const SizedBox(width: 16),
@@ -260,8 +270,7 @@ class _LoginState extends State<Login> {
                           buildSocialIcon('assets/facebook.png', () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content:
-                                      Text('تسجيل دخول ـ Facebook')),
+                                  content: Text('تسجيل دخول ـ Facebook')),
                             );
                           }),
                         ],
@@ -292,3 +301,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
