@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:smart_care/helpers/navigator.dart';
-import 'package:smart_care/views/onboarding_screens/onboarding_2.dart';
 import 'package:smart_care/views/onboarding_screens/onboarding_4.dart';
 import 'package:smart_care/widgets/onboarding_progress.dart';
 
